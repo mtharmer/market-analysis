@@ -10,9 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_19_194630) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_19_212501) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bars", force: :cascade do |t|
+    t.string "day"
+    t.string "time"
+    t.bigint "instrument_id", null: false
+    t.string "timeframe_measurement"
+    t.integer "timeframe_value"
+    t.decimal "high"
+    t.decimal "low"
+    t.decimal "open"
+    t.decimal "close"
+    t.integer "volume"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["instrument_id"], name: "index_bars_on_instrument_id"
+  end
+
+  create_table "instruments", force: :cascade do |t|
+    t.string "symbol"
+    t.string "exchange"
+    t.string "asset_class"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -26,4 +50,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_19_194630) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bars", "instruments"
 end

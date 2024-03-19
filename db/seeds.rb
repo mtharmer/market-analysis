@@ -12,6 +12,6 @@ require 'bcrypt'
 
 if Rails.env.development?
   User.find_or_create_by!(email: 'test@user.com') do |user|
-    user.password = BCrypt::Password.create('test')
+    user.password = BCrypt::Password.create('test123')
   end
 end

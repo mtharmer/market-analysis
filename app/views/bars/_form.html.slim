@@ -1,0 +1,50 @@
+= form_with(model: bar) do |form|
+  - if bar.errors.any?
+    div style="color: red"
+      h2 = "#{pluralize(bar.errors.count, "error")} prohibited this bar from being saved:"
+      ul
+        - bar.errors.each do |error|
+          li = error.full_message
+
+  div
+    = form.label :day, style: "display: block"
+    = form.text_field :day
+
+  div
+    = form.label :time, style: "display: block"
+    = form.text_field :time
+
+  div
+    = form.label :instrument_id, style: "display: block"
+    = form.text_field :instrument_id
+
+  div
+    = form.label :timeframe_measurement, style: "display: block"
+    = form.text_field :timeframe_measurement
+
+  div
+    = form.label :timeframe_value, style: "display: block"
+    = form.number_field :timeframe_value
+
+  div
+    = form.label :high, style: "display: block"
+    = form.text_field :high
+
+  div
+    = form.label :low, style: "display: block"
+    = form.text_field :low
+
+  div
+    = form.label :open, style: "display: block"
+    = form.text_field :open
+
+  div
+    = form.label :close, style: "display: block"
+    = form.text_field :close
+
+  div
+    = form.label :volume, style: "display: block"
+    = form.number_field :volume
+
+  div
+    = form.submit

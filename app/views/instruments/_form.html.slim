@@ -1,0 +1,22 @@
+= form_with(model: instrument) do |form|
+  - if instrument.errors.any?
+    div style="color: red"
+      h2 = "#{pluralize(instrument.errors.count, "error")} prohibited this instrument from being saved:"
+      ul
+        - instrument.errors.each do |error|
+          li = error.full_message
+
+  div
+    = form.label :symbol, style: "display: block"
+    = form.text_field :symbol
+
+  div
+    = form.label :exchange, style: "display: block"
+    = form.text_field :exchange
+
+  div
+    = form.label :asset_class, style: "display: block"
+    = form.text_field :asset_class
+
+  div
+    = form.submit

@@ -1,0 +1,10 @@
+h1 Editing bar
+
+== render "form", bar: @bar
+
+br
+
+div
+  => link_to "Show this bar", @bar
+  '|
+  =< link_to "Back to bars", bars_path

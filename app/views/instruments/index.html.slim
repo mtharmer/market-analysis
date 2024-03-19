@@ -1,0 +1,11 @@
+p style="color: green" = notice
+
+h1 Instruments
+
+#instruments
+  - @instruments.each do |instrument|
+    == render instrument
+    p
+      = link_to "Show this instrument", instrument
+
+= link_to "New instrument", new_instrument_path

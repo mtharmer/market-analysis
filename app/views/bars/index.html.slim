@@ -1,0 +1,11 @@
+p style="color: green" = notice
+
+h1 Bars
+
+#bars
+  - @bars.each do |bar|
+    == render bar
+    p
+      = link_to "Show this bar", bar
+
+= link_to "New bar", new_bar_path
