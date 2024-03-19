@@ -54,6 +54,17 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "factory_bot_rails", "~> 6.2"
+  gem "faker", "~> 3.2"
+  gem "rails-controller-testing", "~> 1.0"
+  gem "rspec-rails", "~> 6.0"
+  gem "rubocop", "~> 1.57"
+  gem "rubocop-rails", "~> 2.21"
+  gem "rubocop-rspec", "~> 2.24"
+  gem "shoulda-matchers", "~> 5.3"
+  gem "simplecov", "~> 0.22.0"
+  gem "slim_lint", "~> 0.24.0"
+  gem "webmock", "~> 3.19"
 end
 
 group :development do
@@ -67,3 +78,6 @@ group :development do
   # gem "spring"
 end
 
+gem "slim-rails", "~> 3.6"
+
+gem "devise", "~> 4.9"
