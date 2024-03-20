@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   resources :bars
+  post 'bars/import', to: 'bars#import'
   resources :instruments
   devise_for :users
   root 'home#index'

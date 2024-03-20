@@ -2,10 +2,40 @@ p style="color: green" = notice
 
 h1 Bars
 
-#bars
-  - @bars.each do |bar|
-    == render bar
-    p
-      = link_to "Show this bar", bar
+h4 Import Data
+= form_with url: bars_import_path, multipart: true do |form|
+  .form-group
+    div
+      = file_field_tag :file, class: 'form-control'
+    div
+      = form.collection_select :instrument_id, Instrument.order(:symbol), :id, :symbol, include_blank: false
+    div
+      = submit_tag "Start Import", class: "btn btn-primary"
 
+#bars
+  table.table
+    thead
+      tr
+        th Day
+        th Time
+        th Symbol
+        th Timeframe
+        th Open
+        th Close
+        th High
+        th Low
+        th
+    tbody
+      - @bars.each do |bar|
+        tr
+          td = bar.day
+          td = bar.time
+          td = bar.instrument.symbol
+          td = "#{bar.timeframe_value}#{bar.timeframe_measurement}"
+          td = bar.open
+          td = bar.close
+          td = bar.high
+          td = bar.low
+          td = link_to "Show", bar
+.form-control = will_paginate @bars
 = link_to "New bar", new_bar_path

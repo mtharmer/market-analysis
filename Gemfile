@@ -83,3 +83,5 @@ end
 gem 'slim-rails', '~> 3.6'
 
 gem 'devise', '~> 4.9'
+
+gem "will_paginate", "~> 4.0"
