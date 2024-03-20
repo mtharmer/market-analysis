@@ -1,22 +1,24 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "bars/show", type: :view do
-  before(:each) do
+RSpec.describe 'bars/show', type: :view do
+  before do
     assign(:bar, Bar.create!(
-      day: "Day",
-      time: "Time",
-      instrument: nil,
-      timeframe_measurement: "Timeframe Measurement",
-      timeframe_value: 2,
-      high: "9.99",
-      low: "9.99",
-      open: "9.99",
-      close: "9.99",
-      volume: 3
-    ))
+                   day: 'Day',
+                   time: 'Time',
+                   instrument: nil,
+                   timeframe_measurement: 'Timeframe Measurement',
+                   timeframe_value: 2,
+                   high: '9.99',
+                   low: '9.99',
+                   open: '9.99',
+                   close: '9.99',
+                   volume: 3
+                 ))
   end
 
-  it "renders attributes in <p>" do
+  it 'renders attributes in <p>' do # rubocop:disable RSpec/ExampleLength
     render
     expect(rendered).to match(/Day/)
     expect(rendered).to match(/Time/)

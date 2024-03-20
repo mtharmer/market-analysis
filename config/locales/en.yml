@@ -30,4 +30,21 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  hello: 'Hello world'
+  bars:
+    create:
+      success: 'Bar was successfully created.'
+    update:
+      success: 'Bar was successfully updated.'
+    destroy:
+      success: 'Bar was successfully destroyed.'
+    import:
+      success: 'Done importing new bars.'
+  instruments:
+    create:
+      success: 'Instrument was successfully created.'
+    update:
+      success: 'Instrument was successfully updated.'
+    destroy:
+      success: 'Instrument was successfully destroyed.'
+

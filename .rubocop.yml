@@ -87,3 +87,5 @@ Metrics/ClassLength:
 
 Metrics/MethodLength:
   CountAsOne: ['array']
+  Exclude:
+    - db/migrate/**/*

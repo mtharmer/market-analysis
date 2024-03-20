@@ -1,38 +1,39 @@
-require "rails_helper"
+# frozen_string_literal: true
+
+require 'rails_helper'
 
 RSpec.describe BarsController, type: :routing do
-  describe "routing" do
-    it "routes to #index" do
-      expect(get: "/bars").to route_to("bars#index")
+  describe 'routing' do
+    it 'routes to #index' do
+      expect(get: '/bars').to route_to('bars#index')
     end
 
-    it "routes to #new" do
-      expect(get: "/bars/new").to route_to("bars#new")
+    it 'routes to #new' do
+      expect(get: '/bars/new').to route_to('bars#new')
     end
 
-    it "routes to #show" do
-      expect(get: "/bars/1").to route_to("bars#show", id: "1")
+    it 'routes to #show' do
+      expect(get: '/bars/1').to route_to('bars#show', id: '1')
     end
 
-    it "routes to #edit" do
-      expect(get: "/bars/1/edit").to route_to("bars#edit", id: "1")
+    it 'routes to #edit' do
+      expect(get: '/bars/1/edit').to route_to('bars#edit', id: '1')
     end
 
-
-    it "routes to #create" do
-      expect(post: "/bars").to route_to("bars#create")
+    it 'routes to #create' do
+      expect(post: '/bars').to route_to('bars#create')
     end
 
-    it "routes to #update via PUT" do
-      expect(put: "/bars/1").to route_to("bars#update", id: "1")
+    it 'routes to #update via PUT' do
+      expect(put: '/bars/1').to route_to('bars#update', id: '1')
     end
 
-    it "routes to #update via PATCH" do
-      expect(patch: "/bars/1").to route_to("bars#update", id: "1")
+    it 'routes to #update via PATCH' do
+      expect(patch: '/bars/1').to route_to('bars#update', id: '1')
     end
 
-    it "routes to #destroy" do
-      expect(delete: "/bars/1").to route_to("bars#destroy", id: "1")
+    it 'routes to #destroy' do
+      expect(delete: '/bars/1').to route_to('bars#destroy', id: '1')
     end
   end
 end
