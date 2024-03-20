@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :instrument do
-    symbol { 'MyString' }
-    exchange { 'MyString' }
-    asset_class { 'MyString' }
+    symbol { 'ES' }
+    exchange { 'CME' }
+    asset_class { 'Futures' }
   end
 end

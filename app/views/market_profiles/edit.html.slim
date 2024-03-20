@@ -1,0 +1,10 @@
+h1 Editing market profile
+
+== render "form", market_profile: @market_profile
+
+br
+
+div
+  => link_to "Show this market profile", @market_profile
+  '|
+  =< link_to "Back to market profiles", market_profiles_path

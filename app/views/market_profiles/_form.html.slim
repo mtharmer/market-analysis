@@ -1,0 +1,62 @@
+= form_with(model: market_profile) do |form|
+  - if market_profile.errors.any?
+    div style="color: red"
+      h2 = "#{pluralize(market_profile.errors.count, "error")} prohibited this market_profile from being saved:"
+      ul
+        - market_profile.errors.each do |error|
+          li = error.full_message
+
+  div
+    = form.label :day, style: "display: block"
+    = form.text_field :day
+
+  div
+    = form.label :instrument_id, style: "display: block"
+    = form.text_field :instrument_id
+
+  div
+    = form.label :high, style: "display: block"
+    = form.text_field :high
+
+  div
+    = form.label :low, style: "display: block"
+    = form.text_field :low
+
+  div
+    = form.label :open, style: "display: block"
+    = form.text_field :open
+
+  div
+    = form.label :close, style: "display: block"
+    = form.text_field :close
+
+  div
+    = form.label :initial_balance_high, style: "display: block"
+    = form.text_field :initial_balance_high
+
+  div
+    = form.label :initial_balance_low, style: "display: block"
+    = form.text_field :initial_balance_low
+
+  div
+    = form.label :value_area_high, style: "display: block"
+    = form.text_field :value_area_high
+
+  div
+    = form.label :value_area_low, style: "display: block"
+    = form.text_field :value_area_low
+
+  div
+    = form.label :point_of_control, style: "display: block"
+    = form.text_field :point_of_control
+
+  div
+    = form.label :day_type, style: "display: block"
+    = form.text_field :day_type
+
+  div
+    = form.label :opening_type, style: "display: block"
+    = form.text_field :opening_type
+
+  div
+    = form.submit

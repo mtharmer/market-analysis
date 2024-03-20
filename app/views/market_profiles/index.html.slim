@@ -1,0 +1,11 @@
+p style="color: green" = notice
+
+h1 Market profiles
+
+#market_profiles
+  - @market_profiles.each do |market_profile|
+    == render market_profile
+    p
+      = link_to "Show this market profile", market_profile
+
+= link_to "New market profile", new_market_profile_path

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_19_212501) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_20_202410) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -38,6 +38,25 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_19_212501) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "market_profiles", force: :cascade do |t|
+    t.string "day"
+    t.bigint "instrument_id", null: false
+    t.decimal "high"
+    t.decimal "low"
+    t.decimal "open"
+    t.decimal "close"
+    t.decimal "initial_balance_high"
+    t.decimal "initial_balance_low"
+    t.decimal "value_area_high"
+    t.decimal "value_area_low"
+    t.decimal "point_of_control"
+    t.string "day_type"
+    t.string "opening_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["instrument_id"], name: "index_market_profiles_on_instrument_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -51,4 +70,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_19_212501) do
   end
 
   add_foreign_key "bars", "instruments"
+  add_foreign_key "market_profiles", "instruments"
 end

@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :bar do
     day { 'MyString' }
     time { 'MyString' }
-    instrument { nil }
+    instrument
     timeframe_measurement { 'MyString' }
     timeframe_value { 1 }
     high { '9.99' }

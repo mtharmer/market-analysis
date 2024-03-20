@@ -47,4 +47,11 @@ en:
       success: 'Instrument was successfully updated.'
     destroy:
       success: 'Instrument was successfully destroyed.'
+  market_profiles:
+    create:
+      success: 'Market profile was successfully created.'
+    update:
+      success: 'Market profile was successfully updated.'
+    destroy:
+      success: 'Market profile was successfully destroyed.'
 

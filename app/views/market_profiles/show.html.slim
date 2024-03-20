@@ -1,0 +1,10 @@
+p style="color: green" = notice
+
+== render @market_profile
+
+div
+  => link_to "Edit this market profile", edit_market_profile_path(@market_profile)
+  '|
+  =< link_to "Back to market profiles", market_profiles_path
+
+  = button_to "Destroy this market profile", @market_profile, method: :delete
