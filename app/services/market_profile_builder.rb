@@ -10,6 +10,10 @@ class MarketProfileBuilder
     raise ActiveRecord::RecordNotUnique if MarketProfile.find_by(day: @day, instrument: @instrument)
 
     @bars = find_profile_bars
+    unless @bars.present? && @bars.length > 2
+      Rails.logger.error "Unable to find bars for #{@intrument.symbol} on day #{@day}"
+      return
+    end
     create_profile
   end
 
