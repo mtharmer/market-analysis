@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_20_202410) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_21_025433) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,10 +20,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_20_202410) do
     t.bigint "instrument_id", null: false
     t.string "timeframe_measurement"
     t.integer "timeframe_value"
-    t.decimal "high"
-    t.decimal "low"
-    t.decimal "open"
-    t.decimal "close"
+    t.decimal "high", precision: 10, scale: 2
+    t.decimal "low", precision: 10, scale: 2
+    t.decimal "open", precision: 10, scale: 2
+    t.decimal "close", precision: 10, scale: 2
     t.integer "volume"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -36,25 +36,36 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_20_202410) do
     t.string "asset_class"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "tick_size"
   end
 
   create_table "market_profiles", force: :cascade do |t|
     t.string "day"
     t.bigint "instrument_id", null: false
-    t.decimal "high"
-    t.decimal "low"
-    t.decimal "open"
-    t.decimal "close"
-    t.decimal "initial_balance_high"
-    t.decimal "initial_balance_low"
-    t.decimal "value_area_high"
-    t.decimal "value_area_low"
-    t.decimal "point_of_control"
+    t.decimal "high", precision: 10, scale: 2
+    t.decimal "low", precision: 10, scale: 2
+    t.decimal "open", precision: 10, scale: 2
+    t.decimal "close", precision: 10, scale: 2
+    t.decimal "initial_balance_high", precision: 10, scale: 2
+    t.decimal "initial_balance_low", precision: 10, scale: 2
+    t.decimal "value_area_high", precision: 10, scale: 2
+    t.decimal "value_area_low", precision: 10, scale: 2
+    t.decimal "point_of_control", precision: 10, scale: 2
     t.string "day_type"
     t.string "opening_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "total_tpos"
     t.index ["instrument_id"], name: "index_market_profiles_on_instrument_id"
+  end
+
+  create_table "tpos", force: :cascade do |t|
+    t.bigint "market_profile_id", null: false
+    t.decimal "price", precision: 10, scale: 2
+    t.text "letters", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["market_profile_id"], name: "index_tpos_on_market_profile_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -71,4 +82,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_20_202410) do
 
   add_foreign_key "bars", "instruments"
   add_foreign_key "market_profiles", "instruments"
+  add_foreign_key "tpos", "market_profiles"
 end

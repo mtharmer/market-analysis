@@ -7,11 +7,3 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-
-require 'bcrypt'
-
-if Rails.env.development?
-  User.find_or_create_by!(email: 'test@user.com') do |user|
-    user.password = BCrypt::Password.create('test123')
-  end
-end

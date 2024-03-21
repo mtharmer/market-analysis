@@ -11,6 +11,10 @@
     = form.text_field :symbol
 
   div
+    = form.label :tick_size, style: "display: block"
+    = form.number_field :tick_size, step: :any
+
+  div
     = form.label :exchange, style: "display: block"
     = form.text_field :exchange
 

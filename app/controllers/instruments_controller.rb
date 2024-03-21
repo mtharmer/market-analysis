@@ -66,6 +66,6 @@ class InstrumentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def instrument_params
-    params.require(:instrument).permit(:symbol, :exchange, :asset_class)
+    params.require(:instrument).permit(:symbol, :tick_size, :exchange, :asset_class)
   end
 end
