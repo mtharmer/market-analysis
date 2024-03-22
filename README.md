@@ -27,7 +27,6 @@ And verify the database can be accessed by running
 
 `$ psql -U postgres`
 
-
 ### Ruby
 
 #### rbenv
@@ -81,8 +80,8 @@ After saving, run `source ~/.bashrc` to reload the session.
 
 Next, install the desired version of Node along with yarn:
 ```
-$ nvm install v16
-$ nvm use v16
+$ nvm install v18
+$ nvm use v18
 $ npm install -g yarn
 ```
 
