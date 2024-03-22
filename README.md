@@ -93,6 +93,45 @@ And finally, compile the stylesheets using:
 
 `$ rails assets:precompile`
 
+### Redis
+
+Redis may be out of date with the gems. If so, we can pull the download:
+```
+$ wget https://github.com/redis/redis/archive/7.2.4.tar.gz
+$ tar -xzf redis-7.2.4.tar.gz
+$ cd redis-7.2.4/
+$ make
+$ make install
+$ sudo mkdir -p /etc/redis
+$ sudo cp redis.conf /etc/redis/redis.conf
+$ sudo touch /lib/systemd/redis-server.service
+```
+
+Fill the redis service file with contents similar to this:
+
+```
+[Unit]
+Description=Redis
+After=syslog.target
+
+[Service]
+ExecStart=/usr/local/bin/redis-server /etc/redis/redis.conf
+RestartSec=5s
+Restart=on-success
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Finally, create symlinks and start the service:
+
+```
+$ cd /etc/systemd
+$ sudo ln -s /lib/systemd/redis-server.service redis-server.service
+$ sudo ln -s /lib/systemd/redis-server.service redis.service
+$ sudo systemctl start redis
+```
+
 ## Running
 
 If this is the first time the application is running, set the database using the following:
