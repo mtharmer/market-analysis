@@ -66,6 +66,20 @@ Once these are installed, all gems may be installed using bundle:
 
 ## Running
 
+If this is the first time the application is running, set the database using the following:
+
+`$ rails db:reset`
+
+Note - make sure you have created a user in postgres related to your local username, i.e.:
+```
+$ psql -U postgres
+> create user myuser createdb;
+```
+
+Otherwise, any pending migrations can be run using:
+
+`$ rails db:migrate`
+
 The base application can be run by simply using:
 
 `$ rails s`
