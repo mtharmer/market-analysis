@@ -27,7 +27,6 @@ And verify the database can be accessed by running
 
 `$ psql -U postgres`
 
-
 ### Ruby
 
 #### rbenv
@@ -63,6 +62,36 @@ Before installing dependencies, there are several `apt` packages that must be in
 Once these are installed, all gems may be installed using bundle:
 
 `$ bundle install`
+
+### Javascript
+
+Get the `nvm` manager installer:
+
+`$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash`
+
+Copy the output lines into `.bashrc`:
+```
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+```
+
+After saving, run `source ~/.bashrc` to reload the session.
+
+Next, install the desired version of Node along with yarn:
+```
+$ nvm install v18
+$ nvm use v18
+$ npm install -g yarn
+```
+
+Then, in the repository, run:
+
+`$ yarn install`
+
+And finally, compile the stylesheets using:
+
+`$ rails assets:precompile`
 
 ## Running
 
