@@ -85,9 +85,13 @@ $ nvm use v18
 $ npm install -g yarn
 ```
 
-Finally, in the repository, run:
+Then, in the repository, run:
 
 `$ yarn install`
+
+And finally, compile the stylesheets using:
+
+`$ rails assets:precompile`
 
 ## Running
 
