@@ -49,10 +49,10 @@ RSpec.describe MarketProfile, type: :model do
 
   describe 'calculate_value_area' do
     let(:day) { '04/01/2024' }
-    let(:existing_profile) {
+    let(:existing_profile) do
       create(:market_profile, day: day, instrument: instrument,
                               point_of_control: 20.25, total_tpos: 10)
-    }
+    end
 
     before do
       create(:tpo, market_profile: existing_profile, price: 20.0, letters: %w[A B])
