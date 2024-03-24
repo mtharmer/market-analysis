@@ -12,8 +12,7 @@
 
   div
     = form.label :tick_size, style: "display: block"
-    = form.number_field :tick_size, step: :any
-
+    = form.number_field :tick_size, step: 0.01
   div
     = form.label :exchange, style: "display: block"
     = form.text_field :exchange

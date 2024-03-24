@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :tpo do
-    market_profile { nil }
+    market_profile
     price { '9.99' }
     letters { 'MyText' }
   end

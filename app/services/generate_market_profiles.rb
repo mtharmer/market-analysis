@@ -5,10 +5,12 @@ class GenerateMarketProfiles
     Instrument.includes(:bars).find_each do |instrument|
       days = instrument.bars.collect(&:day).uniq
       days.each do |day|
-        args = { id: instrument.id, day: day }.to_json
-        id = instrument.to_h['id']
-        CreateMarketProfileJob.perform_later(id, day)
+        CreateMarketProfileJob.perform_async(instrument.id, day) if weekday?(day)
       end
     end
+  end
+
+  def weekday?(day)
+    [*1..6].include? Date.strptime(day, '%m/%d/%Y').wday
   end
 end

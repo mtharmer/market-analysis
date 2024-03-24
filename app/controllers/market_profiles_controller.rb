@@ -57,8 +57,7 @@ class MarketProfilesController < ApplicationController
     end
   end
 
-  def generate
-  end
+  def generate; end
 
   private
 
