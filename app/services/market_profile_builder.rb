@@ -40,6 +40,7 @@ class MarketProfileBuilder
   private
 
   def profile_bars
-    Bar.where(day: @day, instrument_id: @instrument_id).order(:time).to_a.filter { _1.time.between?('09:30', '16:00') }
+    Bar.where(day: @day, instrument_id: @instrument_id)
+       .where('time >= ? AND time < ?', '09:30', '16:00').order(:time)
   end
 end

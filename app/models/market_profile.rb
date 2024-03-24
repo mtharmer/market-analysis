@@ -37,19 +37,22 @@ class MarketProfile < ApplicationRecord
 
   def tpo_hash
     tick_size = instrument.tick_size
+    return {} unless tick_size&.positive?
+
     tpos = {}
     profile_bars.each_with_index do |bar, idx|
-      # Iterate over all all price points hit in the bar
-      i = bar.low
-      letter = (65 + idx).chr
-      while i < bar.high
-        if tpos[i].nil?
-          tpos[i] = [letter]
-        else
-          tpos[i].push letter
-        end
-        i += tick_size
-      end
+      tpos = tpo_bar(bar, idx, tpos)
+    end
+    tpos
+  end
+
+  def tpo_bar(bar, idx, tpos)
+    # Iterate over all all price points hit in the bar
+    i = bar.low.to_f
+    letter = (65 + idx).chr
+    while i <= bar.high.to_f
+      tpos[i].nil? ? tpos[i] = [letter] : tpos[i].push(letter)
+      i = (i + tick_size).to_f
     end
     tpos
   end

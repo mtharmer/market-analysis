@@ -64,7 +64,7 @@ group :development, :test do
   gem 'rubocop-rails', '~> 2.21'
   gem 'rubocop-rspec', '~> 2.24'
   gem 'shoulda-matchers', '~> 5.3'
-  gem 'simplecov', '~> 0.22.0'
+  gem 'simplecov', '~> 0.22.0', require: false
   gem 'slim_lint', '~> 0.24.0'
   gem 'webmock', '~> 3.19'
 end
