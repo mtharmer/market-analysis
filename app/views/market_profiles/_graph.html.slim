@@ -1,0 +1,13 @@
+table.table.table-borderless.table-sm
+  thead
+    th[style='width:10%'] Price
+    th[style='width:1%']
+    th[style='width:1%']
+    th
+  tbody
+    - @market_profile.tpos_for_display.each do |tpo|
+      tr
+        td = tpo.price
+        td[class="#{'table-info' if tpo.in_value_area?}"]
+        td[class="#{'table-danger' if tpo.in_initial_balance?}"]
+        td[class="#{tpo.poc? ? 'table-warning' : ''}"] = tpo.letters_for_display

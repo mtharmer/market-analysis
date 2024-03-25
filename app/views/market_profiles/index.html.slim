@@ -1,11 +1,41 @@
 p style="color: green" = notice
 
-h1 Market profiles
+h1 Market Profiles
+
+h4 Update Profiles
+= form_with url: market_profiles_generate_path, multipart: true do |form|
+  = submit_tag "Update Profiles", class: "btn btn-primary"
 
 #market_profiles
-  - @market_profiles.each do |market_profile|
-    == render market_profile
-    p
-      = link_to "Show this market profile", market_profile
-
+  table.table
+    thead
+      tr
+        th Day
+        th Symbol
+        th Open
+        th Close
+        th High
+        th Low
+        th IB High
+        th IB Low
+        th POC
+        th VAH
+        th VAL
+        th
+    tbody
+      - @market_profiles.each do |mp|
+        tr
+          td = mp.day
+          td = mp.instrument.symbol
+          td = mp.open
+          td = mp.close
+          td = mp.high
+          td = mp.low
+          td = mp.initial_balance_high
+          td = mp.initial_balance_low
+          td = mp.point_of_control
+          td = mp.value_area_high
+          td = mp.value_area_low
+          td = link_to "Show", mp
+  .form-control = will_paginate @market_profiles
 = link_to "New market profile", new_market_profile_path

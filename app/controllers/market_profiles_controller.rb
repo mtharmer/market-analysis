@@ -5,7 +5,7 @@ class MarketProfilesController < ApplicationController
 
   # GET /market_profiles or /market_profiles.json
   def index
-    @market_profiles = MarketProfile.all
+    @market_profiles = MarketProfile.order(day: :desc).paginate(page: params[:page])
   end
 
   # GET /market_profiles/1 or /market_profiles/1.json
@@ -57,7 +57,9 @@ class MarketProfilesController < ApplicationController
     end
   end
 
-  def generate; end
+  def generate
+    GenerateMarketProfiles.new.call
+  end
 
   private
 

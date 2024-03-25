@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   resources :market_profiles
+  post 'market_profiles/generate', to: 'market_profiles#generate'
   resources :bars
   post 'bars/import', to: 'bars#import'
   resources :instruments

@@ -25,6 +25,10 @@ class MarketProfile < ApplicationRecord
     self.value_area_high, self.value_area_low = search_for_value_limits(current_sum, total_sum, vah, val)
   end
 
+  def tpos_for_display
+    tpos.order(price: :desc)
+  end
+
   private
 
   def tpo_point_of_control_length

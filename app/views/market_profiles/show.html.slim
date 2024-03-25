@@ -2,6 +2,8 @@ p style="color: green" = notice
 
 == render @market_profile
 
+== render 'graph', market_profile: @market_profile
+
 div
   => link_to "Edit this market profile", edit_market_profile_path(@market_profile)
   '|
