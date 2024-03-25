@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
+  mount Sidekiq::Web => "/sidekiq" # mount Sidekiq::Web in your Rails app
   resources :market_profiles
   post 'market_profiles/generate', to: 'market_profiles#generate'
   resources :bars

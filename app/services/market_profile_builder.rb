@@ -7,7 +7,7 @@ class MarketProfileBuilder
   end
 
   def call
-    raise ActiveRecord::RecordNotUnique unless MarketProfile.find_by(day: @day, instrument_id: @instrument_id).nil?
+    return unless MarketProfile.find_by(day: @day, instrument_id: @instrument_id).nil?
 
     @bars = profile_bars
     unless @bars.present? && @bars.length > 2

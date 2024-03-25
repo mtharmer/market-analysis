@@ -10,7 +10,7 @@ RSpec.describe MarketProfileBuilder do
   describe 'call' do
     it 'returns if a profile already exists' do
       create(:market_profile, instrument: instrument, day: existing_day)
-      expect { described_class.new(existing_day, instrument.id).call }.to raise_error ActiveRecord::RecordNotUnique
+      expect { described_class.new(existing_day, instrument.id).call }.not_to change(MarketProfile, :count)
     end
 
     it 'returns if no bars are found', skip: 'Bad test' do

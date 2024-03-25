@@ -87,3 +87,5 @@ gem 'devise', '~> 4.9'
 gem 'will_paginate', '~> 4.0'
 
 gem 'sidekiq', '~> 7.2'
+
+gem "sidekiq-statistic", "~> 1.4"
