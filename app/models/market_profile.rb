@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class MarketProfile < ApplicationRecord
+  include MarketProfileConcern
+
   belongs_to :instrument
   has_many :tpos, dependent: :destroy
 
@@ -25,19 +27,32 @@ class MarketProfile < ApplicationRecord
     self.value_area_high, self.value_area_low = search_for_value_limits(current_sum, total_sum, vah, val)
   end
 
+  def set_day_type
+    daytypes = %w[
+      normal neutral neutral_extreme normal_variation non_trend trend double_distribution
+    ]
+    daytypes.each do |dt|
+      result = method("#{dt}_day?").call
+      next unless result
+
+      self.day_type = dt
+      save!
+      Rails.logger.info "Setting day type #{dt} for profile on day #{day}"
+    end
+    # self.day_type = find_day_type
+  end
+
+  def initial_balance
+    initial_balance_high - initial_balance_low
+  end
+
+  def set_opening_type; end
+
   def tpos_for_display
     tpos.order(price: :desc)
   end
 
   private
-
-  def tpo_point_of_control_length
-    related_tpos.find_by(price: point_of_control)&.letters&.length || 0
-  end
-
-  def highest_tpo
-    related_tpos.order(Arel.sql('array_length(letters, 1) DESC, price DESC')).first
-  end
 
   def tpo_hash
     tick_size = instrument.tick_size
@@ -81,6 +96,14 @@ class MarketProfile < ApplicationRecord
     end
 
     [vah, val, sum]
+  end
+
+  def tpo_point_of_control_length
+    related_tpos.find_by(price: point_of_control)&.letters&.length || 0
+  end
+
+  def highest_tpo
+    related_tpos.order(Arel.sql('array_length(letters, 1) DESC, price DESC')).first
   end
 
   def related_tpos

@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_21_025433) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_27_212745) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "bars", force: :cascade do |t|
-    t.string "day"
+    t.date "day"
     t.string "time"
     t.bigint "instrument_id", null: false
     t.string "timeframe_measurement"
@@ -27,6 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_21_025433) do
     t.integer "volume"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["day", "time"], name: "index_bars_on_day_and_time", unique: true
     t.index ["instrument_id"], name: "index_bars_on_instrument_id"
   end
 
@@ -40,7 +41,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_21_025433) do
   end
 
   create_table "market_profiles", force: :cascade do |t|
-    t.string "day"
+    t.date "day"
     t.bigint "instrument_id", null: false
     t.decimal "high", precision: 10, scale: 2
     t.decimal "low", precision: 10, scale: 2
@@ -56,6 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_21_025433) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "total_tpos"
+    t.index ["day"], name: "index_market_profiles_on_day", unique: true
     t.index ["instrument_id"], name: "index_market_profiles_on_instrument_id"
   end
 

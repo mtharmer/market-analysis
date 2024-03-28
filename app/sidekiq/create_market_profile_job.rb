@@ -7,11 +7,6 @@ class CreateMarketProfileJob
   queue_as :default
 
   def perform(id, day)
-    Rails.logger.info "Received with id #{id}, class #{id.class}, day #{day}, class #{day.class}"
-    return unless id.is_a?(Integer) && day.is_a?(String)
-
-    return if Instrument.find_by(id: id).nil?
-
-    MarketProfileBuilder.new(day, id).call
+    MarketProfileBuilder.new(day, id).call if Instrument.find(id)
   end
 end

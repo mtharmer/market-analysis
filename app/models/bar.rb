@@ -10,19 +10,15 @@ class Bar < ApplicationRecord
   def self.import(file, instrument)
     CSV.foreach(file.path, headers: true) do |row|
       row = row.to_h
-      timestamp = row['timestamp'].to_datetime
-      day = datetime_to_day(timestamp)
-      time = datetime_to_time(timestamp)
+      dateargs = row['timestamp'].split
+      unless dateargs.length == 2
+        Rails.logger.error "Length is not 2 - #{ts}"
+        next
+      end
+      day = dateargs[0]
+      time = dateargs[1]
       Bar.create_with(open: row['open'], close: row['close'], high: row['high'], low: row['low'], volume: row['volume'])
          .find_or_create_by(instrument_id: instrument.id, day: day, time: time)
     end
-  end
-
-  def self.datetime_to_day(datetime)
-    datetime.strftime '%m/%d/%Y'
-  end
-
-  def self.datetime_to_time(datetime)
-    datetime.strftime '%H:%M'
   end
 end
