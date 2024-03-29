@@ -7,20 +7,23 @@ class MarketProfileBuilder
   end
 
   def call
-    return unless MarketProfile.find_by(day: @day, instrument_id: @instrument_id).nil?
+    @profile = MarketProfile.find_by(day: @day, instrument_id: @instrument_id)
+    if @profile.nil?
+      @bars = profile_bars
+      unless @bars.present? && @bars.length > 2
+        Rails.logger.error "Unable to find bars for #{@intrument_id} on day #{@day}"
+        return
+      end
 
-    @bars = profile_bars
-    unless @bars.present? && @bars.length > 2
-      Rails.logger.error "Unable to find bars for #{@intrument_id} on day #{@day}"
-      return
+      @profile = MarketProfile.create(initial_attributes)
+      return unless @profile
+
+      @profile.create_tpos
+      @profile.calculate_value_area
+      @profile.save!
     end
 
-    @profile = MarketProfile.create(initial_attributes)
-    return unless @profile
-
-    @profile.create_tpos
-    @profile.calculate_value_area
-    @profile.save!
+    @profile.set_metrics if @profile.metric.blank?
   end
 
   def initial_attributes

@@ -3,7 +3,7 @@
 class GenerateMarketProfiles
   def call
     Instrument.includes(:bars).find_each do |instrument|
-      days = instrument.bars.collect(&:day).uniq
+      days = instrument.bars.collect(&:day).uniq.sort
       days.each do |day|
         CreateMarketProfileJob.perform_async(instrument.id, day.to_s) if weekday?(day)
       end

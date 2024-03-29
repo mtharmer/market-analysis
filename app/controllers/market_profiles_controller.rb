@@ -72,6 +72,6 @@ class MarketProfilesController < ApplicationController
   def market_profile_params
     params.require(:market_profile).permit(:day, :instrument_id, :high, :low, :open, :close, :initial_balance_high,
                                            :initial_balance_low, :value_area_high, :value_area_low, :point_of_control,
-                                           :day_type, :opening_type)
+                                           :day_type, :opening_type, :manual_day_type, :manual_opening_type)
   end
 end

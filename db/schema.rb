@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_27_212745) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_28_212149) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -57,8 +57,27 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_27_212745) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "total_tpos"
+    t.string "manual_day_type"
+    t.string "manual_opening_type"
     t.index ["day"], name: "index_market_profiles_on_day", unique: true
     t.index ["instrument_id"], name: "index_market_profiles_on_instrument_id"
+  end
+
+  create_table "metrics", force: :cascade do |t|
+    t.bigint "market_profile_id", null: false
+    t.decimal "avg_initial_balance", precision: 10, scale: 2
+    t.decimal "avg_true_range", precision: 10, scale: 2
+    t.decimal "initial_balance", precision: 10, scale: 2
+    t.decimal "true_range", precision: 10, scale: 2
+    t.decimal "z_score_initial_balance", precision: 10, scale: 2
+    t.decimal "z_score_true_range", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "broken_high", default: false, null: false
+    t.boolean "broken_low", default: false, null: false
+    t.boolean "close_within_range", default: false, null: false
+    t.boolean "close_near_extreme", default: false, null: false
+    t.index ["market_profile_id"], name: "index_metrics_on_market_profile_id"
   end
 
   create_table "tpos", force: :cascade do |t|
@@ -84,5 +103,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_27_212745) do
 
   add_foreign_key "bars", "instruments"
   add_foreign_key "market_profiles", "instruments"
+  add_foreign_key "metrics", "market_profiles"
   add_foreign_key "tpos", "market_profiles"
 end

@@ -5,8 +5,10 @@ class MarketProfile < ApplicationRecord
 
   belongs_to :instrument
   has_many :tpos, dependent: :destroy
+  has_one :metric, dependent: :destroy
 
   delegate :tick_size, to: :instrument
+  # delegate :initial_balance, to: :metric
 
   def create_tpos
     return unless tpo_hash.any?
@@ -19,6 +21,11 @@ class MarketProfile < ApplicationRecord
     self.total_tpos = related_tpos.map { _1.letters.length }.inject(&:+)
   end
 
+  def set_metrics
+    self.metric = Metric.new if metric.nil?
+    metric.set_metrics
+  end
+
   def calculate_value_area
     vah = val = point_of_control
     current_sum = tpo_point_of_control_length
@@ -28,22 +35,28 @@ class MarketProfile < ApplicationRecord
   end
 
   def set_day_type
-    daytypes = %w[
-      normal neutral neutral_extreme normal_variation non_trend trend double_distribution
-    ]
-    daytypes.each do |dt|
-      result = method("#{dt}_day?").call
-      next unless result
+    # daytypes = %w[
+    #   normal neutral neutral_extreme normal_variation non_trend trend double_distribution
+    # ]
+    # daytypes.each do |dt|
+    #   result = method("#{dt}_day?").call
+    #   next unless result
 
-      self.day_type = dt
-      save!
-      Rails.logger.info "Setting day type #{dt} for profile on day #{day}"
-    end
-    # self.day_type = find_day_type
+    #   self.day_type = dt
+    #   save!
+    #   Rails.logger.info "Setting day type #{dt} for profile on day #{day}"
+    # end
+    self.day_type = day_finder
+    save!
+    Rails.logger.info "Setting day type #{day_type} for profile on day #{day}"
   end
 
   def initial_balance
     initial_balance_high - initial_balance_low
+  end
+
+  def true_range
+    high - low
   end
 
   def set_opening_type; end
