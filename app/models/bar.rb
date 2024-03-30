@@ -7,7 +7,7 @@ class Bar < ApplicationRecord
 
   self.per_page = 50
 
-  def self.import(file, instrument)
+  def self.import(file, instrument) # rubocop:disable Metrics/AbcSize
     CSV.foreach(file.path, headers: true) do |row|
       row = row.to_h
       dateargs = row['timestamp'].split

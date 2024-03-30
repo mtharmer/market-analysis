@@ -35,20 +35,8 @@ class MarketProfile < ApplicationRecord
   end
 
   def set_day_type
-    # daytypes = %w[
-    #   normal neutral neutral_extreme normal_variation non_trend trend double_distribution
-    # ]
-    # daytypes.each do |dt|
-    #   result = method("#{dt}_day?").call
-    #   next unless result
-
-    #   self.day_type = dt
-    #   save!
-    #   Rails.logger.info "Setting day type #{dt} for profile on day #{day}"
-    # end
     self.day_type = day_finder
     save!
-    Rails.logger.info "Setting day type #{day_type} for profile on day #{day}"
   end
 
   def initial_balance
@@ -59,7 +47,10 @@ class MarketProfile < ApplicationRecord
     high - low
   end
 
-  def set_opening_type; end
+  def set_opening_type
+    self.opening_type = opening_type_finder
+    save!
+  end
 
   def tpos_for_display
     tpos.order(price: :desc)

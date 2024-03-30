@@ -54,7 +54,7 @@ class Metric < ApplicationRecord
   end
 
   def find_close
-    self.close_within_range = high <= ib_high_variance && low >= ib_low_variance
+    self.close_within_range = (close <= ib_high_variance && close >= ib_low_variance)
     self.close_near_extreme = (close > tr_high_variance || close < tr_low_variance)
   end
 
