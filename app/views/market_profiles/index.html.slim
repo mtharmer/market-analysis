@@ -5,6 +5,8 @@ h1 Market Profiles
 h4 Update Profiles
 = form_with url: market_profiles_generate_path, multipart: true do |form|
   = submit_tag "Update Profiles", class: "btn btn-primary"
+= form_with url: market_profiles_recalculate_path, multipart: true do |form|
+  = submit_tag "Recalculate Profiles", class: "btn btn-primary"
 
 #market_profiles
   table.table

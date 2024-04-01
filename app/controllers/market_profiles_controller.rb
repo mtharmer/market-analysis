@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class MarketProfilesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_market_profile, only: %i[show edit update destroy]
 
   # GET /market_profiles or /market_profiles.json
@@ -59,6 +60,10 @@ class MarketProfilesController < ApplicationController
 
   def generate
     GenerateMarketProfiles.new.call
+  end
+
+  def recalculate
+    RecalculateMarketProfiles.new.call
   end
 
   private
