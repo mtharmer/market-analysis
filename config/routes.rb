@@ -3,6 +3,8 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  get 'dashboard/index', to: 'dashboard#index'
+  # get 'dashboard/show'
   mount Sidekiq::Web => '/sidekiq' # mount Sidekiq::Web in your Rails app
   resources :market_profiles
   post 'market_profiles/generate', to: 'market_profiles#generate'

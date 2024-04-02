@@ -1,0 +1,34 @@
+h1 Dashboard
+h3 Day Types by Opening
+#day_types_by_opening
+  table.table
+    thead
+      tr
+        th Opening Type
+        th Day Type
+        th Count
+        th Ratio
+    tbody
+      - @dashboard[:day_type_by_opening].each do |row|
+        tr
+          td = row['opening_type']
+          td = row['day_type']
+          td = row['count']
+          td = row['ratio'].round(2)
+hr
+h3 Opening Types by Day
+#opening_types_by_day
+  table.table
+    thead
+      tr
+        th Day Type
+        th Opening Type
+        th Count
+        th Ratio
+    tbody
+      - @dashboard[:opening_type_by_day].each do |row|
+        tr
+          td = row['day_type']
+          td = row['opening_type']
+          td = row['count']
+          td = row['ratio'].round(2)
